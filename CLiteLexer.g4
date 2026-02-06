@@ -112,3 +112,4 @@ fragment ESC
 LINE_COMMENT  : '//' ~[\r\n]*      -> channel(HIDDEN) ;
 BLOCK_COMMENT : '/*' .*? '*/'      -> channel(HIDDEN) ;
 WS : [ \t\r\n\f]+ -> channel(HIDDEN) ;
+ERROR_CHAR : . ;
