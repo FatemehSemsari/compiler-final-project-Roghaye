@@ -1,6 +1,3 @@
-# فاز ۲ پروژه کامپایلر - مقایسه دو کد C
-# نسخه ساده و قابل فهم
-
 from c_tokenize import Tokenizer
 import os
 
