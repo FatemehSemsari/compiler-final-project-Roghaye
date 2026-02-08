@@ -1,0 +1,24 @@
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import tempfile
+import os
+from token_similarity import compare_codes
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route("/analyze", methods=["POST"])
+def send_result():
+    data= request.get_json()
+    code1= data["code1"]
+    code2= data["code2"]
+
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".c") as f1:
+        f1.write(code1.enccode())
+        path1 = f1.name
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".c") as f2:
+        f1.write(code1.enccode())
+        path2 = f2.name
+    result = compare_codes(path1,path2)
+
+    return jsonify(result)
