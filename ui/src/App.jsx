@@ -7,11 +7,13 @@ function App() {
 
 const {data, loading} = useContext(ContextApi)
 
+console.log(data)
+
   return (
     <>
       <CodeBox/>
-      {/* {data && */}
-      <AnalysisBox title="Token Analysis" result={data}></AnalysisBox> 
+      {data &&
+      <AnalysisBox title="Token Analysis" result={data}></AnalysisBox> }
       
     </>
   )

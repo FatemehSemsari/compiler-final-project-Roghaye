@@ -8,9 +8,9 @@ def compare_codes(file1, file2):
     tokens1 = tokenizer.tokenize_file(file1)
     tokens2 = tokenizer.tokenize_file(file2)
     
-    text1 = [token.get("text", "") for token in tokens1]
-    text2 = [token.get("text", "") for token in tokens2]
-        
+    text1 = [t["text"] for t in tokens1["tokens"]]
+    text2 = [t["text"] for t in tokens2["tokens"]]
+    
     set1 = set(text1)
     set2 = set(text2)
     
@@ -20,7 +20,7 @@ def compare_codes(file1, file2):
     if total == 0:
         score1 = 1.0  
     else:
-        score1 = common / total
+        score1 = round(common / total,1)
     
     compare_len = min(50, len(text1), len(text2))
     
@@ -31,14 +31,14 @@ def compare_codes(file1, file2):
         for i in range(compare_len):
             if text1[i] == text2[i]:
                 same_order += 1
-        score2 = same_order / compare_len
+        score2 = round(same_order / compare_len,1)
  
-    final_score = (score1 + score2) / 2
+    final_score = round((score1 + score2) / 2,1)
   
     result = {
         "token_numbers" : {
-            "code A": len(text1),
-            "code B": len(text2)
+            "code_A": len(text1),
+            "code_B": len(text2)
         }, 
         "common_tokens": common,
         "total": total,
@@ -48,4 +48,4 @@ def compare_codes(file1, file2):
         "final_score":final_score
     }
     
-    return final_score
+    return result

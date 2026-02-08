@@ -22,7 +22,7 @@ const {fetchData} = useContext(ContextApi)
         </div>
       </div>
       <button className="p-2 w-32 mt-5 rounded-md justify-center items-center bg-yellow-300 hover:bg-yellow-200 ease-in-out" onClick={()=>{fetchData(code_1Ref.current.value,
-code_2Ref.current.value)}}>Analyse</button>
+        code_2Ref.current.value)}}>Analyse</button>
     </div>
   )
 }

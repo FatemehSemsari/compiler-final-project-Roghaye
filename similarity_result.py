@@ -14,11 +14,16 @@ def send_result():
     code2= data["code2"]
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".c") as f1:
-        f1.write(code1.enccode())
+        f1.write(code1.encode())
         path1 = f1.name
     with tempfile.NamedTemporaryFile(delete=False, suffix=".c") as f2:
-        f1.write(code1.enccode())
+        f2.write(code2.encode())
         path2 = f2.name
     result = compare_codes(path1,path2)
+    os.remove(path1)
+    os.remove(path2)
 
     return jsonify(result)
+
+if __name__ == "__main__":
+    app.run(debug=True)

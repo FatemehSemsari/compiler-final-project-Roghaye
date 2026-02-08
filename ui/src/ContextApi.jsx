@@ -21,9 +21,8 @@ export const ApiProvider= ({children}) =>{
             }),
             })
 
-            const data = await res.json()
-            console.log(data)
-            setData(data)
+            const awn = await res.json()
+            setData(awn)
         }
     
     return (
