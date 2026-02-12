@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
 
+
+.errorLine{
+    background-color:#fee2e2 !important;
+}
+
+.sameLine{
+    background-color:#fef9c3 ;
 }

@@ -72,6 +72,9 @@ class ASTBuilder(CLiteParserVisitor):
         return node
 
     def visitConjunction(self, ctx: CLiteParser.ConjunctionContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         node = self.visit(ctx.equality(0))
         for i in range(1, len(ctx.equality())):
             right = self.visit(ctx.equality(i))
@@ -79,6 +82,9 @@ class ASTBuilder(CLiteParserVisitor):
         return node
 
     def visitEquality(self, ctx: CLiteParser.EqualityContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         left = self.visit(ctx.relation(0))
         if ctx.relation(1) is None:
             return left
@@ -87,6 +93,9 @@ class ASTBuilder(CLiteParserVisitor):
         return BinOp(op=op, left=left, right=right)
 
     def visitRelation(self, ctx: CLiteParser.RelationContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         left = self.visit(ctx.addition(0))
         if ctx.addition(1) is None:
             return left
@@ -98,9 +107,12 @@ class ASTBuilder(CLiteParserVisitor):
         return BinOp(op=op, left=left, right=right)
 
     def visitAddition(self, ctx: CLiteParser.AdditionContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         node = self.visit(ctx.term(0))
         ops = ctx.getChildren()
-        # ساده‌تر: از متن بین ترم‌ها می‌گیریم
+     
         for i in range(1, len(ctx.term())):
             op_text = ctx.getChild(2*i-1).getText()
             right = self.visit(ctx.term(i))
@@ -108,6 +120,9 @@ class ASTBuilder(CLiteParserVisitor):
         return node
 
     def visitTerm(self, ctx: CLiteParser.TermContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         node = self.visit(ctx.factor(0))
         for i in range(1, len(ctx.factor())):
             op_text = ctx.getChild(2*i-1).getText()
@@ -116,6 +131,9 @@ class ASTBuilder(CLiteParserVisitor):
         return node
 
     def visitFactor(self, ctx: CLiteParser.FactorContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         if ctx.MINUS():
             return UnaryOp(op="-", operand=self.visit(ctx.primary()))
         if ctx.NOT():
@@ -123,6 +141,9 @@ class ASTBuilder(CLiteParserVisitor):
         return self.visit(ctx.primary())
 
     def visitPrimary(self, ctx: CLiteParser.PrimaryContext):
+        child = ctx.primary()
+        if child is None:
+             return None
         if ctx.ID():
             return Var(name=ctx.ID().getText())
         if ctx.IntegerLiteral():

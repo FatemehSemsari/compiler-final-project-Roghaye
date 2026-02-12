@@ -158,7 +158,7 @@ def sub_matching(ast_a , ast_b):
         return 0
     
     result = {
-        "ast_similarity":  len(intersection)/len(union)
+        "ast_similarity": round(len(intersection)/len(union),1)
     }
     
     return result

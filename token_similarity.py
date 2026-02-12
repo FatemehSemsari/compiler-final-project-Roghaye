@@ -25,11 +25,15 @@ def compare_codes(file1, file2):
     
     common_items = set1 & set2
 
-    indexes_in_list1 = [i for i, x in enumerate(set1) if x in common_items]
-    indexes_in_list2 = [i for i, x in enumerate(set2) if x in common_items]
-
-    simLines_Code1 = [lines1[i] for i in indexes_in_list1]
-    simLines_Code2 = [lines2[i] for i in indexes_in_list2]
+   
+    simLines_Code1 = sorted(set(
+    lines1[i] for i, token in enumerate(text1)
+    if token in common_items
+    ))
+    simLines_Code2 = sorted(set(
+    lines2[i] for i, token in enumerate(text2)
+    if token in common_items
+    ))
 
     common = len(set1 & set2)   
     total = len(set1 | set2)   
