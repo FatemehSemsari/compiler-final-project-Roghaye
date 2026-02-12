@@ -107,7 +107,7 @@ def subtree_hash(node, hashs):
         else:
             else_hash=""
 
-        h=f"IF({cond_hash},{than_hash},{else_hash})"
+        h=f"If({cond_hash},{than_hash},{else_hash})"
 
     elif isinstance(node,While):
         condw_hash=subtree_hash(node.cond,hashs)
@@ -157,4 +157,8 @@ def sub_matching(ast_a , ast_b):
     if len(union) ==0:
         return 0
     
-    return len(intersection)/len(union)
+    result = {
+        "ast_similarity":  len(intersection)/len(union)
+    }
+    
+    return result

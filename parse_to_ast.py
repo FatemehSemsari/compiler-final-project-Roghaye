@@ -23,15 +23,24 @@ def to_jsonable(x):
         return [to_jsonable(i) for i in x]
     return x
 
-
-def main(path: str):
+def parser_to_ast(path):
     lexer = CLiteLexer(FileStream(path, encoding="utf-8"))
     tokens = CommonTokenStream(lexer)
     parser = CLiteParser(tokens)
     tree = parser.program()
 
     ast = ASTBuilder().visit(tree)
-    print(json.dumps(to_jsonable(ast), ensure_ascii=False, indent=2))
+    return ast
 
-if __name__ == "__main__":
-    main(sys.argv[1])
+
+# def main(path: str):
+#     lexer = CLiteLexer(FileStream(path, encoding="utf-8"))
+#     tokens = CommonTokenStream(lexer)
+#     parser = CLiteParser(tokens)
+#     tree = parser.program()
+
+#     ast = ASTBuilder().visit(tree)
+#     print(json.dumps(to_jsonable(ast), ensure_ascii=False, indent=2))
+
+# if __name__ == "__main__":
+#     main(sys.argv[1])
